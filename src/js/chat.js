@@ -1,23 +1,36 @@
 /* eslint-disable class-methods-use-this */
 export default class Chat {
-  addMessage(message, location) {
+  constructor () {
+    this.chatField = document.querySelector('.chat__messages');
+  }
+  addMessage(type, message, location) {
     const msgContainerEl = document.createElement('div');
     msgContainerEl.className = 'msg__item';
+
     const newMsg = document.createElement('div');
-    newMsg.className = `chat__message`;
+    newMsg.className = 'chat__message';
+
     msgContainerEl.insertAdjacentElement('afterbegin', newMsg);
     const msgTimeStampEl = document.createElement('div');
+    msgTimeStampEl.className = 'message__time';
     msgTimeStampEl.textContent = this.messageTimeStamp();
-    const msgContentEl = document.createElement('div');
-    msgContentEl.className = 'chat__content';
-    msgContentEl.textContent = message;
+    newMsg.insertAdjacentElement('beforeend', msgTimeStampEl);
+
+    if (type === 'audio' || type === 'video') {
+      newMsg.insertAdjacentHTML('afterbegin', `<${type} class="${type}" controls></${type}>`);
+    } else {
+      const msgContentEl = document.createElement('div');
+      msgContentEl.className = 'chat__content';
+      msgContentEl.textContent = message;
+      newMsg.insertAdjacentElement('afterbegin', msgContentEl);
+    }
+    
     const coordsEl = document.createElement('div');
     coordsEl.className = 'coords';
-    coordsEl.textContent = `[ ${location.latitude.toFixed(5)} : ${location.longitude.toFixed(5)} ]`
-    newMsg.insertAdjacentElement('beforeend', msgTimeStampEl);
-    newMsg.insertAdjacentElement('afterbegin', msgContentEl);
+    coordsEl.textContent = `[ ${location.latitude.toFixed(5)} : ${location.longitude.toFixed(5)} ]`;
     msgContainerEl.insertAdjacentElement('beforeend', coordsEl);
-    return msgContainerEl;
+    
+    return this.chatField.insertAdjacentElement('afterbegin', msgContainerEl);
   }
 
   messageTimeStamp() {
@@ -35,8 +48,8 @@ export default class Chat {
   }
 
   recordTimer(command) {
+    const timerEl = document.querySelector('.timer__record');
     if (command === 'start') {
-      const timerEl = document.querySelector('.timer__record');
       let seconds = 0;
       let minutes = 0;
       setInterval(() => {
@@ -45,8 +58,8 @@ export default class Chat {
           seconds = 0;
           minutes += 1;
         }
-        secondsText = seconds < 10 ? `0${seconds}` : seconds;
-        minutesText = minutes < 10 ? `0${minutes}` : minutes;
+        const secondsText = seconds < 10 ? `0${seconds}` : seconds;
+        const minutesText = minutes < 10 ? `0${minutes}` : minutes;
         timerEl.textContent = `${minutesText}:${secondsText}`;
       }, 1000);
     } else {
@@ -59,5 +72,4 @@ export default class Chat {
     mediaBtns.classList.toggle('hidden');
     actionBtns.classList.toggle('hidden');
   }
-
 }
