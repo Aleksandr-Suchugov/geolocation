@@ -2,10 +2,8 @@ export default function geolocation() {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(
       (data) => {
-        const location = { latitude: 0, longitude: 0 };
-        location.latitude = data.coords.latitude.toFixed(5);
-        location.longitude = data.coords.longitude.toFixed(5);
-        return location;
+        const { latitude, longitude } = data.coords;
+        return `lat.:${latitude}, long.:${longitude}.`;
       },
       (err) => {
         document.body.insertAdjacentHTML(

@@ -28,7 +28,7 @@ export default class Chat {
 
     const coordsEl = document.createElement('div');
     coordsEl.className = 'coords';
-    coordsEl.textContent = `[ ${location.latitude} : ${location.longitude} ]`;
+    coordsEl.textContent = location;
     msgContainerEl.insertAdjacentElement('beforeend', coordsEl);
 
     return this.chatField.insertAdjacentElement('afterbegin', msgContainerEl);
