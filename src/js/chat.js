@@ -4,6 +4,8 @@ import geolocation from './geolocation';
 export default class Chat {
   constructor() {
     this.chatField = document.querySelector('.chat__messages');
+    this.mediaBtns = document.querySelector('.media__btns');
+    this.controlBtns = document.querySelector('.record__btns');
   }
 
   addMessage(type, message) {
@@ -71,8 +73,8 @@ export default class Chat {
     }
   }
 
-  btnsToggle(mediaBtns, actionBtns) {
-    mediaBtns.classList.toggle('hidden');
-    actionBtns.classList.toggle('hidden');
+  btnsToggle() {
+    this.mediaBtns.classList.toggle('hidden');
+    this.controlBtns.classList.toggle('hidden');
   }
 }

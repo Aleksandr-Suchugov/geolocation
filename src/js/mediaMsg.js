@@ -5,8 +5,6 @@ export default class MediaMsg {
     this.chat = new Chat();
     this.stopBtn = document.querySelector('.stop__record');
     this.cancelBtn = document.querySelector('.delete__record');
-    this.mediaBtns = document.querySelector('.media__btns');
-    this.controlBtns = document.querySelector('.record__btns');
     this.stream = null;
     this.type = null;
   }
@@ -24,7 +22,7 @@ export default class MediaMsg {
         });
         this.type = 'video';
       }
-      this.chat.btnsToggle(this.mediaBtns, this.controlBtns);
+      this.chat.btnsToggle();
 
       const recorder = new MediaRecorder(this.stream);
       let chunks = [];
@@ -48,14 +46,14 @@ export default class MediaMsg {
         this.chat.recordTimer('stop');
         recorder.stop();
         this.stream.getTracks().forEach((track) => track.stop());
-        this.chat.btnsToggle(this.mediaBtns, this.controlBtns);
+        this.chat.btnsToggle();
       });
 
       this.cancelBtn.addEventListener('click', () => {
         this.chat.recordTimer('stop');
         recorder.stop();
         chunks = [];
-        this.chat.btnsToggle(this.mediaBtns, this.controlBtns);
+        this.chat.btnsToggle();
       });
     });
   }

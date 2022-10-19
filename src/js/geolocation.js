@@ -3,8 +3,8 @@ export default function geolocation() {
     navigator.geolocation.getCurrentPosition(
       (data) => {
         // console.log(data.coords);
-        const latitude = data.coords.latitude;
-        const longitude = data.coords.longitude;
+        const { latitude } = data.coords;
+        const { longitude } = data.coords;
         document.querySelector('.coords').textContent = `lat.:${latitude}, long.:${longitude}.`;
       },
       (err) => {

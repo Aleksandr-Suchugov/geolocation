@@ -16,17 +16,17 @@ export default class API {
   init() {
     this.msgOptions.addEventListener('click', (ev) => {
       if (ev.target.classList.contains('chat__input')) {
-        this.input.addEventListener('keydown', (ev) => {
-          if (ev.keyCode === 13) {
+        this.input.addEventListener('keydown', (e) => {
+          if (e.keyCode === 13) {
             this.chat.addMessage('text', this.input.value);
             this.input.value = '';
           }
         });
       }
       if (ev.target.parentElement.classList.contains('media__btns')) {
-        const type = ev.target.dataset;
+        const type = ev.target.dataset.type;
         this.chat.addMessage(type, type);
-        this.mediaPlayer = document.querySelector('.chat__messages').firstElementChild;
+        this.mediaPlayer = document.querySelector('.chat__messages').firstElementChild.querySelector(type);
         this.media.recording(ev.target, this.mediaPlayer);
       }
     });

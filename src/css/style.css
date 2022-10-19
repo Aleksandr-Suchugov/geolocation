@@ -32,9 +32,7 @@ form {
 .chat__message {
   display: flex;
   justify-content: space-between;
-  width: 400px;
   background-color: white;
-  height: fit-content;
 }
 
 .chat__message:nth-child(n + 2) {
@@ -86,7 +84,7 @@ form {
 }
 
 .input__options:hover {
-  border: 3px solid black;;
+  border: 3px solid black;
 }
 
 .voice__message, .video__message {
@@ -113,12 +111,25 @@ form {
   display: none;
 }
 
+.msg__item {
+  margin-bottom: 12px;
+  border: 1px solid #5f6368;
+  padding: 2px;
+}
+
 .message__time {
   font-size: 10px;
+  text-align: right;
+  margin-right: 8px;
 }
 
 .coords {
   font-size: 10px;
+  margin-top: 6px;
+}
+
+.video {
+  width: 350px;
 }
 
 .modal_mask {
