@@ -15,15 +15,16 @@ export default class API {
 
   init() {
     this.msgOptions.addEventListener('click', (ev) => {
+      const location = geolocation;
       if (ev.target.classList.contains('chat__input')) {
         this.input.addEventListener('keydown', (ev) => {
-          if (ev.keyCode === 13) this.chat.addMessage(this.input.value, geolocation());
+          if (ev.keyCode === 13) this.chat.addMessage(this.input.value, location);
         });
         this.input.value = '';
       }
       if (ev.target.parentElement.classList.contains('media__btns')) {
         const type = ev.target.dataset;
-        this.chat.addMessage(type, 'media', geolocation());
+        this.chat.addMessage(type, 'media', location);
         const mediaPlayer = document.querySelector(`.${type}`);
         this.media.recording(ev.target, mediaPlayer);
       }
