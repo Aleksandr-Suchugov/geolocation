@@ -1,30 +1,28 @@
 import Chat from './chat';
 
 export default class MediaMsg {
-  constructor(recordButton, mediaPlayer) {
+  constructor() {
     this.chat = new Chat();
-    this.recordBtn = recordButton;
-    this.player = mediaPlayer;
     this.stopBtn = document.querySelector('.stop__record');
     this.cancelBtn = document.querySelector('.delete__record');
     this.mediaBtns = document.querySelector('.media__btns');
     this.controlBtns = document.querySelector('.record__btns');
     this.stream = null;
+    this.type = null;
   }
 
-  recording(location) {
-    this.recordBtn.addEventListener('click', async (e) => {
-      let type;
+  recording(recordBtn, mediaPlayer) {
+    recordBtn.addEventListener('click', async (e) => {
       if (e.target.classList === 'voice__message') {
         this.stream = await navigator.mediaDevices.getUserMedia({
           audio: true,
         });
-        type = 'audio';
+        this.type = 'audio';
       } else {
         this.stream = await navigator.mediaDevices.getUserMedia({
           video: true,
         });
-        type = 'video';
+        this.type = 'video';
       }
       this.chat.btnsToggle(this.mediaBtns, this.controlBtns);
 
@@ -41,7 +39,7 @@ export default class MediaMsg {
 
       recorder.addEventListener('stop', () => {
         const blob = new Blob(chunks);
-        this.player.src = URL.createObjectURL(blob);
+        mediaPlayer.src = URL.createObjectURL(blob);
       });
 
       recorder.start();
@@ -49,10 +47,8 @@ export default class MediaMsg {
       this.stopBtn.addEventListener('click', () => {
         this.chat.recordTimer('stop');
         recorder.stop();
-        const mediaMsg = this.stream.getTracks().forEach((track) => track.stop());
+        this.stream.getTracks().forEach((track) => track.stop());
         this.chat.btnsToggle(this.mediaBtns, this.controlBtns);
-        this.chat.addMediaMsg(type);
-        
       });
 
       this.cancelBtn.addEventListener('click', () => {

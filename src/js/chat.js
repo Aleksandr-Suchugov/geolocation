@@ -1,8 +1,9 @@
 /* eslint-disable class-methods-use-this */
 export default class Chat {
-  constructor () {
+  constructor() {
     this.chatField = document.querySelector('.chat__messages');
   }
+
   addMessage(type, message, location) {
     const msgContainerEl = document.createElement('div');
     msgContainerEl.className = 'msg__item';
@@ -24,12 +25,12 @@ export default class Chat {
       msgContentEl.textContent = message;
       newMsg.insertAdjacentElement('afterbegin', msgContentEl);
     }
-    
+
     const coordsEl = document.createElement('div');
     coordsEl.className = 'coords';
-    coordsEl.textContent = `[ ${location.latitude.toFixed(5)} : ${location.longitude.toFixed(5)} ]`;
+    coordsEl.textContent = `[ ${location.latitude} : ${location.longitude} ]`;
     msgContainerEl.insertAdjacentElement('beforeend', coordsEl);
-    
+
     return this.chatField.insertAdjacentElement('afterbegin', msgContainerEl);
   }
 

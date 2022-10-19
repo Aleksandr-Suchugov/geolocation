@@ -21,7 +21,10 @@ export default class API {
         this.input.value = '';
       }
       if (ev.target.parentElement.classList.contains('media__btns')) {
-        this.media.recording(geolocation());
+        const type = ev.target.dataset;
+        this.chat.addMessage(type, 'media', geolocation());
+        const mediaPlayer = document.querySelector(`.${type}`);
+        this.media.recording(ev.target, mediaPlayer);
       }
     });
   }
