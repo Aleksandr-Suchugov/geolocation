@@ -30,6 +30,8 @@ form {
 }
 
 .chat__message {
+  display: flex;
+  justify-content: space-between;
   width: 400px;
   background-color: white;
   height: fit-content;
@@ -109,6 +111,14 @@ form {
 
 .hidden {
   display: none;
+}
+
+.message__time {
+  font-size: 10px;
+}
+
+.coords {
+  font-size: 10px;
 }
 
 .modal_mask {

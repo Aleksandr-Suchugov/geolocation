@@ -1,10 +1,12 @@
 /* eslint-disable class-methods-use-this */
+import geolocation from './geolocation';
+
 export default class Chat {
   constructor() {
     this.chatField = document.querySelector('.chat__messages');
   }
 
-  addMessage(type, message, location) {
+  addMessage(type, message) {
     const msgContainerEl = document.createElement('div');
     msgContainerEl.className = 'msg__item';
 
@@ -28,8 +30,8 @@ export default class Chat {
 
     const coordsEl = document.createElement('div');
     coordsEl.className = 'coords';
-    coordsEl.textContent = location;
     msgContainerEl.insertAdjacentElement('beforeend', coordsEl);
+    geolocation();
 
     return this.chatField.insertAdjacentElement('afterbegin', msgContainerEl);
   }
