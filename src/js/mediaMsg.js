@@ -5,13 +5,15 @@ export default class MediaMsg {
     this.chat = new Chat();
     this.stopBtn = document.querySelector('.stop__record');
     this.cancelBtn = document.querySelector('.delete__record');
+    this.actionBtns = document.querySelector('.media__btns');
+    this.mediaPlayer = null;
     this.stream = null;
     this.type = null;
   }
 
-  recording(recordBtn, mediaPlayer) {
-    recordBtn.addEventListener('click', async (e) => {
-      if (e.target.classList === 'voice__message') {
+  recording() {
+    this.actionBtns.addEventListener('click', async (e) => {
+      if (e.target.dataset.type === 'audio') {
         this.stream = await navigator.mediaDevices.getUserMedia({
           audio: true,
         });
@@ -22,6 +24,8 @@ export default class MediaMsg {
         });
         this.type = 'video';
       }
+      this.chat.addMessage(this.type, this.type);
+      this.mediaPlayer = document.querySelector('.chat__messages').firstElementChild.querySelector(this.type);
       this.chat.btnsToggle();
 
       const recorder = new MediaRecorder(this.stream);
@@ -37,7 +41,7 @@ export default class MediaMsg {
 
       recorder.addEventListener('stop', () => {
         const blob = new Blob(chunks);
-        mediaPlayer.src = URL.createObjectURL(blob);
+        this.mediaPlayer.src = URL.createObjectURL(blob);
       });
 
       recorder.start();
@@ -47,6 +51,7 @@ export default class MediaMsg {
         recorder.stop();
         this.stream.getTracks().forEach((track) => track.stop());
         this.chat.btnsToggle();
+        Array.from(this.actionBtns.children).forEach((el) => el.classList.toggle('hidden'));
       });
 
       this.cancelBtn.addEventListener('click', () => {
@@ -54,6 +59,7 @@ export default class MediaMsg {
         recorder.stop();
         chunks = [];
         this.chat.btnsToggle();
+        Array.from(this.actionBtns.children).forEach((el) => el.classList.toggle('hidden'));
       });
     });
   }

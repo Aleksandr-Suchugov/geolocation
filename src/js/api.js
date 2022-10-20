@@ -9,8 +9,8 @@ export default class API {
     this.media = new MediaMsg();
     this.input = document.querySelector('.chat__input');
     this.msgOptions = document.querySelector('.input__options');
-    this.mediaBtns = document.querySelector('.media__btns');
-    this.mediaPlayer = null;
+    this.audioRec = document.querySelector('.voice__message');
+    this.videoRec = document.querySelector('.video__message');
   }
 
   init() {
@@ -23,11 +23,11 @@ export default class API {
           }
         });
       }
-      if (ev.target.parentElement.classList.contains('media__btns')) {
-        const type = ev.target.dataset.type;
-        this.chat.addMessage(type, type);
-        this.mediaPlayer = document.querySelector('.chat__messages').firstElementChild.querySelector(type);
-        this.media.recording(ev.target, this.mediaPlayer);
+      if (ev.target.classList.contains('send__media')) {
+        ev.target.classList.add('hidden');
+        this.audioRec.classList.remove('hidden');
+        this.videoRec.classList.remove('hidden');
+        this.media.recording();
       }
     });
   }
