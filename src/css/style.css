@@ -111,6 +111,14 @@ form {
   display: none;
 }
 
+.geo__hidden{
+  display: none;
+}
+
+.longitude, .latitude {
+  margin: 3px 25px;
+}
+
 .msg__item {
   margin-bottom: 12px;
   border: 1px solid #5f6368;
@@ -157,13 +165,15 @@ form {
   font-weight: 500;
   color: #5f6368;
   line-height: 50px;
+  align-self: center;
 }
 
-.close_btn {
+.set_btn {
   background: orange;
   text-decoration: none;
   color: whitesmoke;
   padding: 10px 20px;
   border-radius: 2px;
   margin: 0 auto;
+  margin-top: 8px;
 }

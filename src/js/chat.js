@@ -1,5 +1,4 @@
 /* eslint-disable class-methods-use-this */
-import geolocation from './geolocation';
 
 export default class Chat {
   constructor() {
@@ -32,9 +31,9 @@ export default class Chat {
 
     const coordsEl = document.createElement('div');
     coordsEl.className = 'coords';
+    coordsEl.textContent = document.querySelector('.geo__hidden').textContent;
     msgContainerEl.insertAdjacentElement('beforeend', coordsEl);
-    geolocation();
-
+    
     return this.chatField.insertAdjacentElement('afterbegin', msgContainerEl);
   }
 
