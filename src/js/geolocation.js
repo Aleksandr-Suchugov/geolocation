@@ -8,7 +8,7 @@ export default function geolocation() {
         document.querySelector('.geo__hidden').textContent = `lat.:${latitude}, long.:${longitude}.`;
       },
       (err) => {
-        console.log(err);
+        // console.log(err);
         document.body.insertAdjacentHTML(
           'beforeEnd',
           `<div class="modal_mask">

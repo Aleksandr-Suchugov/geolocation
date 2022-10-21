@@ -33,7 +33,7 @@ export default class Chat {
     coordsEl.className = 'coords';
     coordsEl.textContent = document.querySelector('.geo__hidden').textContent;
     msgContainerEl.insertAdjacentElement('beforeend', coordsEl);
-    
+
     return this.chatField.insertAdjacentElement('afterbegin', msgContainerEl);
   }
 
