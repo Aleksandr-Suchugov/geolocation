@@ -4,6 +4,9 @@
 
 import geolocation from '../geolocation';
 
+const fs = require('fs');
+window.document.body.innerHTML = fs.readFileSync('./index.html');
+
 test('to check that geo coordinates can be set manually', () => {
   global.navigator.permissions = {
     query: jest
