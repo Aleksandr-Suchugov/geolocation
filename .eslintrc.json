@@ -1,7 +1,9 @@
 {
     "env": {
         "browser": true,
-        "es2021": true
+        "es2021": true,
+        "node": true,
+        "jest": true
     },
     "extends": [
         "airbnb-base"
@@ -11,6 +13,22 @@
         "sourceType": "module"
     },
     "rules": {
-        "no-param-reassign": 0
+        "linebreak-style": 0,
+        "no-restricted-syntax": [
+            "error",
+            "LabeledStatement",
+            "WithStatement"
+        ],
+        "no-param-reassign": 0,
+        "no-unused-vars": 0,
+        "no-underscore-dangle": [
+            "error", 
+            { "allowAfterThis": true }
+        ],
+        "max-len": [
+            "error", 
+            {"code": 300}
+        ],
+        "treatUndefinedAsUnspecified": 0
     }
 }
